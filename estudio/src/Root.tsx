@@ -1,4 +1,5 @@
 import { Composition, Still, type CalculateMetadataFunction } from "remotion";
+import { MARCA } from "./tema";
 import { Capa, capaSchema } from "./Capa/Capa";
 import { Papercraft, papercraftSchema } from "./Papercraft/Papercraft";
 import { BAND_HEIGHT, CaseCard, STAGE } from "./CaseCard/CaseCard";
@@ -46,8 +47,8 @@ const reelMistoMetadata: CalculateMetadataFunction<ReelMistoProps> = ({ props })
 const demo: CaseCardProps = {
   media: { type: "image", src: "demo/site.jpg", viewportWidth: 1440, viewportHeight: 900 },
   durationInSeconds: 15,
-  stageColor: "#EBC8B7",
-  windowColor: "#0B0B14",
+  stageColor: MARCA.claro, // o "palco" atrás da janela
+  windowColor: MARCA.escuro,
   caption: "Uma página inteira desenhada e construída com o Claude Code.",
   handle: "suamarca",
   creditPrefix: "Por",
@@ -171,7 +172,7 @@ export const RemotionRoot: React.FC = () => {
       />
           {/* Capa de feed: boneco + letreiro ousado (vira 1º quadro e capa do Reel) */}
       <Still id="Capa-9x16" component={Capa} schema={capaSchema} width={1080} height={1920}
-        defaultProps={{ imagem: "capas/ilustra.png", topo: 270, desce: 170, fundo: "#FFCC02", linhas: [{ texto: "Quanto custa", tamanho: 150 }, { texto: "um vídeo?", tamanho: 150, faixa: "#2F5BEA", cor: "#FFFFFF" }] }} />
+        defaultProps={{ imagem: "capas/ilustra.png", topo: 270, desce: 170, fundo: "#FFCC02" /* cor-da-referencia: o amarelo do fundo da ilustração de exemplo */, linhas: [{ texto: "Quanto custa", tamanho: 150 }, { texto: "um vídeo?", tamanho: 150, faixa: MARCA.principal, cor: MARCA.branco }] }} />
           {/* Colagem de papel com sincronia por palavra */}
       <Composition id="Papercraft-9x16" component={Papercraft} schema={papercraftSchema} fps={30} width={1080} height={1920}
         durationInFrames={240} defaultProps={papercraftDemo}

@@ -55,6 +55,65 @@ SUB_FORCE_STYLE = (
     "Alignment=2,MarginV=90"
 )
 
+# -------- Legenda na marca de quem usa (lida do tema do estúdio) ------------
+#
+# A fonte e as cores da legenda vêm do bloco LEGENDA de estudio/src/tema.ts, o mesmo
+# arquivo que pinta os moldes. Procura, nesta ordem: --tema, ./estudio/src/tema.ts
+# (a cópia do estúdio na pasta de trabalho) e o estúdio que vem no plugin. Se nada
+# for achado, fica o padrão acima (Helvetica branca com contorno preto).
+
+def _hex_para_ass(cor: str) -> str:
+    """#RRGGBB → &H00BBGGRR (o libass guarda as cores ao contrário)."""
+    h = cor.lstrip("#")
+    return f"&H00{h[4:6]}{h[2:4]}{h[0:2]}".upper()
+
+
+def achar_tema(explicito: Path | None) -> Path | None:
+    candidatos = [explicito] if explicito else []
+    candidatos += [
+        Path.cwd() / "estudio" / "src" / "tema.ts",
+        Path(__file__).resolve().parents[3] / "estudio" / "src" / "tema.ts",
+    ]
+    for c in candidatos:
+        if c and c.exists():
+            return c
+    return None
+
+
+def estilo_da_legenda(tema: Path | None, fonte: str | None = None, cor: str | None = None,
+                      contorno: str | None = None) -> tuple[str, Path | None]:
+    """Devolve (force_style, pasta de fontes) a partir do tema; os argumentos passados vencem."""
+    lido: dict[str, str] = {}
+    pasta_fontes: Path | None = None
+    if tema is not None:
+        bloco = re.search(r"export const LEGENDA\s*=\s*\{(.*?)\}", tema.read_text(), re.S)
+        if bloco:
+            for chave in ("fonte", "cor", "contorno"):
+                m = re.search(chave + r'\s*:\s*"([^"]+)"', bloco.group(1))
+                if m:
+                    lido[chave] = m.group(1)
+        else:
+            print(f"aviso: {tema} não tem o bloco LEGENDA; a legenda sai no padrão")
+        fontes = tema.parent.parent / "public" / "fontes"
+        pasta_fontes = fontes if fontes.is_dir() else None
+    fonte = fonte or lido.get("fonte")
+    cor = cor or lido.get("cor")
+    contorno = contorno or lido.get("contorno")
+    estilo = SUB_FORCE_STYLE
+    if fonte:
+        estilo = re.sub(r"FontName=[^,]*", f"FontName={fonte}", estilo)
+    for nome, valor in (("PrimaryColour", cor), ("OutlineColour", contorno)):
+        if valor:
+            if not re.fullmatch(r"#[0-9A-Fa-f]{6}", valor):
+                sys.exit(f"cor da legenda inválida: {valor!r} (use hex de 6 dígitos, como #FFFFFF)")
+            estilo = re.sub(nome + r"=[^,]*", f"{nome}={_hex_para_ass(valor)}", estilo)
+    return estilo, pasta_fontes
+
+
+def _escapar_filtro(caminho: Path) -> str:
+    return str(caminho.resolve()).replace(":", r"\:").replace("'", r"\'")
+
+
 # -------- Helpers ------------------------------------------------------------
 
 
@@ -499,6 +558,8 @@ def build_final_composite(
     subtitles_path: Path | None,
     out_path: Path,
     edit_dir: Path,
+    sub_style: str = SUB_FORCE_STYLE,
+    fonts_dir: Path | None = None,
 ) -> None:
     """Final pass: base → overlays (PTS-shifted) → subtitles LAST → out.
 
@@ -537,9 +598,10 @@ def build_final_composite(
 
     # Subtitles LAST — Rule 1
     if has_subs:
-        subs_abs = str(subtitles_path.resolve()).replace(":", r"\:").replace("'", r"\'")
+        subs_abs = _escapar_filtro(subtitles_path)
+        fontes = f":fontsdir='{_escapar_filtro(fonts_dir)}'" if fonts_dir else ""
         filter_parts.append(
-            f"{current}subtitles='{subs_abs}':force_style='{SUB_FORCE_STYLE}'[outv]"
+            f"{current}subtitles='{subs_abs}'{fontes}:force_style='{sub_style}'[outv]"
         )
         out_label = "[outv]"
     else:
@@ -601,6 +663,11 @@ def main() -> None:
         action="store_true",
         help="Skip audio loudness normalization. Default is on (-14 LUFS, -1 dBTP, LRA 11).",
     )
+    ap.add_argument("--tema", type=Path, default=None,
+                    help="tema.ts de onde ler a fonte e as cores da legenda (padrão: ./estudio/src/tema.ts, depois o do plugin)")
+    ap.add_argument("--legenda-fonte", default=None, help="Fonte da legenda; vence o tema")
+    ap.add_argument("--legenda-cor", default=None, help="Cor da letra, hex como #FFFFFF; vence o tema")
+    ap.add_argument("--legenda-contorno", default=None, help="Cor do contorno, hex como #141414; vence o tema")
     args = ap.parse_args()
 
     edl_path = args.edl.resolve()
@@ -640,13 +707,17 @@ def main() -> None:
 
     # 4. Composite (overlays + subtitles LAST) → intermediate (pre-loudnorm) path
     overlays = edl.get("overlays") or []
+    tema = achar_tema(args.tema)
+    sub_style, fonts_dir = estilo_da_legenda(tema, args.legenda_fonte, args.legenda_cor, args.legenda_contorno)
+    if subs_path:
+        print(f"legenda: {sub_style} (tema: {tema or 'nenhum, padrão'})")
     if args.no_loudnorm:
         # Composite directly to final output
-        build_final_composite(base_path, overlays, subs_path, out_path, edit_dir)
+        build_final_composite(base_path, overlays, subs_path, out_path, edit_dir, sub_style, fonts_dir)
     else:
         # Composite to a temp file, then run loudnorm → final output
         tmp_composite = out_path.with_suffix(".prenorm.mp4")
-        build_final_composite(base_path, overlays, subs_path, tmp_composite, edit_dir)
+        build_final_composite(base_path, overlays, subs_path, tmp_composite, edit_dir, sub_style, fonts_dir)
         print("loudness normalization → social-ready (-14 LUFS / -1 dBTP / LRA 11)")
         apply_loudnorm_two_pass(tmp_composite, out_path, preview=args.draft)
         tmp_composite.unlink(missing_ok=True)

@@ -23,9 +23,13 @@ Precisa de Node 20 ou mais novo (`node -v`). O `npm ci` leva de 1 a 3 minutos na
 
 ## Passo 3 · Pintar com a marca (uma vez por marca)
 
-Tudo o que é cor e fonte mora em `src/tema.ts`. Pergunte as cores da marca (ou peça o logo e tire as cores dele) e troque `MARCA` e `RGB`. O nome que aparece na abertura e no fechamento do reel em blocos fica em `src/Vinhetas.tsx` (`NOME_DA_MARCA`); o @ de cada vídeo vai no campo `handle` das props. Para outra fonte: o `.woff2` em `public/fontes/` e as linhas de `loadFont` no fim do `tema.ts`.
+Tudo o que é cor e fonte mora em `src/tema.ts`, e nenhum molde tem cor escrita dentro dele. Pergunte as cores da marca (ou peça o logo e tire as cores dele) e troque `MARCA`: o resto do arquivo (`RGB`, `ESCURO`, `CLARO`, `MOLDES`) sai dessas cores. `MOLDES` guarda os detalhes de alguns estilos (o papel do Papercraft, a faixa do CaseCard, o cartão do Explicador), que já seguem a marca e só se trocam se a pessoa quiser um detalhe diferente. `LEGENDA` é a fonte e a cor da legenda que a skill `editar-video` queima no vídeo.
 
-Mostre o resultado antes de seguir: `npx remotion still src/index.ts <molde> out/teste.png --frame=<quadro>` e abra a imagem.
+O nome que aparece na abertura e no fechamento do reel em blocos fica em `src/Vinhetas.tsx` (`NOME_DA_MARCA`); o @ de cada vídeo vai no campo `handle` das props. Para outra fonte: o `.woff2` em `public/fontes/`, as linhas de `loadFont` no fim do `tema.ts` e o nome dela em `LEGENDA.fonte`.
+
+Mostre o resultado antes de seguir: `npx remotion still src/index.ts <molde> out/teste.png --frame=<quadro>` e abra a imagem. Repita o comando nos moldes que a pessoa vai usar: a marca tem que aparecer igual em todos.
+
+Duas exceções guardam o visual do criador de referência e não seguem o tema: a skin `"tudor"` do FakeUI e a skin `"neutro"` do SplitScreen. Para a marca, use `skin: "marca"` nos dois.
 
 ## Passo 4 · Trocar a mídia de exemplo pela da pessoa
 
@@ -45,6 +49,16 @@ Para regerar a mídia de exemplo: `bash demo/gerar-demos.sh`.
 - Vídeos longos pesam na memória: renderize um de cada vez.
 
 Antes de dizer que ficou pronto, tire um quadro do vídeo final e olhe (`ffmpeg -ss 3 -i out/<arquivo>.mp4 -frames:v 1 out/conferir.png`): texto cortado, legenda em cima do rosto e cor errada só aparecem assim.
+
+## Passo 6 · Criar o meu estilo (quando a pessoa quer um jeito próprio, não só a cor)
+
+Cor e fonte o tema resolve. Estilo é o resto: como as coisas entram e saem, o ritmo dos cortes, o enquadramento, onde fica o texto. Esse se constrói em cima de um molde:
+
+1. **Achar a referência.** Peça um vídeo que a pessoa admira, ou dois ou três dela mesma. Tire quadros (`ffmpeg -i ref.mp4 -vf fps=2 out/ref-%03d.png`) e descreva, olhando: fundo, onde fica o texto, tamanho da letra, como cada elemento entra, quanto dura cada cena. Meça; não chute.
+2. **Escolher o molde mais perto** na galeria e copiar a pasta dele com um nome novo: `cp -r src/SplitScreen src/MeuEstilo`. Troque o nome do componente e registre uma `<Composition id="MeuEstilo-9x16" ...>` em `src/Root.tsx`, igual às que já estão lá.
+3. **Mudar uma coisa de cada vez**, mostrando um quadro a cada mudança: primeiro o enquadramento, depois a entrada dos elementos (`spring` e `interpolate`), depois o ritmo. Cor nova entra no `tema.ts` (em `MOLDES`, com um nome), nunca escrita no molde. Para técnica de animação, use a skill `remotion-best-practices`, se estiver instalada.
+4. **Conferir:** `bash "$SKILL/../../testes/cores-fora-do-tema.sh" ./estudio` precisa passar (ele acha cor escrita fora do tema), e um quadro do vídeo final precisa ser olhado.
+5. **Guardar na galeria da pessoa:** uma pasta `galeria/` no projeto dela, com o quadro (`MeuEstilo-9x16.png`) e uma ficha no formato de `$SKILL/../../docs/galeria.md` (o que é, para que serve, o comando de render). Na pasta do plugin não, porque ela é trocada a cada atualização. Se o estilo veio de um criador, anote o nome dele na ficha.
 
 ## Regras
 

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Audio } from "@remotion/media";
 import { AbsoluteFill, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { FONT, MARCA } from "../tema";
+import { FONT, MARCA, MOLDES } from "../tema";
 
 // Colagem de papel: cada cena tem papéis
 // coloridos que entram pelas bordas, uma etiqueta de papel rasgado com o título (cada palavra entra quando é dita)
@@ -143,9 +143,9 @@ const Titulo: React.FC<{ c: Cena }> = ({ c }) => {
         filter: "drop-shadow(0 12px 14px rgba(0,0,0,.28))",
       }}
     >
-      <div style={{ backgroundColor: "#FBF8F1", clipPath: rasgado(c.semente + 7), padding: `${T.tam * 0.38}px ${T.tam * 0.45}px` }}>
+      <div style={{ backgroundColor: MOLDES.papel.folha, clipPath: rasgado(c.semente + 7), padding: `${T.tam * 0.38}px ${T.tam * 0.45}px` }}>
         {T.linhas.map((linha, li) => (
-          <div key={li} style={{ fontFamily, fontWeight: 900, fontSize: T.tam, lineHeight: 1.02, letterSpacing: -T.tam * 0.03, color: "#141414" }}>
+          <div key={li} style={{ fontFamily, fontWeight: 900, fontSize: T.tam, lineHeight: 1.02, letterSpacing: -T.tam * 0.03, color: MOLDES.papel.tinta }}>
             {linha.map((p, pi) => {
               const s = spring({ frame: frame - p.em * fps, fps, config: { damping: 12, stiffness: 220 } });
               return (
@@ -206,8 +206,8 @@ const Etiqueta: React.FC<{ e: z.infer<typeof etiqueta>; i: number }> = ({ e, i }
     <div style={{
       position: "absolute", left: e.x, top: e.y, zIndex: 30 + i,
       transform: `translate(-50%,-50%) rotate(${e.rot + (1 - s) * 20}deg) scale(${0.4 + 0.6 * s})`,
-      backgroundColor: e.cor ?? "#FBF8F1", clipPath: rasgado(i * 13 + 5), padding: `${e.tam * 0.2}px ${e.tam * 0.45}px`,
-      fontFamily, fontWeight: 900, fontSize: e.tam, color: "#141414", filter: "drop-shadow(0 8px 10px rgba(0,0,0,.25))",
+      backgroundColor: e.cor ?? MOLDES.papel.folha, clipPath: rasgado(i * 13 + 5), padding: `${e.tam * 0.2}px ${e.tam * 0.45}px`,
+      fontFamily, fontWeight: 900, fontSize: e.tam, color: MOLDES.papel.tinta, filter: "drop-shadow(0 8px 10px rgba(0,0,0,.25))",
       whiteSpace: "nowrap",
     }}>{e.t}</div>
   );
@@ -235,7 +235,7 @@ const CenaView: React.FC<{ c: Cena; pre: number }> = ({ c, pre }) => {
   const fundo = pre > 0 ? interpolate(frame / fps, [pre * 0.35, pre], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1;
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ opacity: fundo, backgroundColor: c.fundoClaro ? "#FFFFFF" : PAPEL }} />
+      <AbsoluteFill style={{ opacity: fundo, backgroundColor: c.fundoClaro ? MARCA.branco : PAPEL }} />
       {!c.fundoClaro ? <Papeis c={c} /> : null}
       <Sequence from={Math.round(pre * fps)} layout="none">
         {(c.elementos ?? []).map((e, i) => <Elemento key={i} e={e} i={i} />)}

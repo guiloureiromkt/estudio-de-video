@@ -1,4 +1,4 @@
-import { FONT } from "../tema";
+import { FONT, RGB } from "../tema";
 import { Video } from "@remotion/media";
 import {
   AbsoluteFill,
@@ -182,7 +182,7 @@ export const CaseCard: React.FC<CaseCardProps> = (props) => {
               textAlign: "center",
               fontFamily,
               fontSize: 17,
-              color: "rgba(19,19,19,.55)",
+              color: `rgba(${RGB.escuro},.55)`,
               // some quando a câmera entra na janela, senão cobre o conteúdo
               opacity: enter * interpolate(zoom, [1, 1.15], [1, 0], { extrapolateRight: "clamp" }),
             }}

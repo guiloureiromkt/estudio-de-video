@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Audio, Video } from "@remotion/media";
 import { AbsoluteFill, Easing, OffthreadVideo, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO } from "../tema";
+import { FONT, ESCURO, MOLDES, RGB, SEM_NEGRITO_FALSO } from "../tema";
 
 // Talking head com texto atrás da cabeça (referência @nekt.ai): o avatar em tela cheia, o fundo
 // escurecido na cor escura do tema, a palavra-chave grande na fonte do tema entre o fundo e a pessoa, e a pessoa
@@ -62,7 +62,7 @@ const Chave: React.FC<{ c: TextoAtrasProps["chaves"][number]; y: number }> = ({ 
         textTransform: "uppercase",
         color: c.destaque ? ESCURO.destaque : ESCURO.texto,
         opacity: sai,
-        textShadow: "0 6px 40px rgba(20,20,20,.55)",
+        textShadow: `0 6px 40px rgba(${RGB.escuro},.55)`,
       }}
     >
       {linhas.map((linha, li) => (
@@ -93,7 +93,7 @@ const Legenda: React.FC<Pick<TextoAtrasProps, "palavras" | "wordsPerCard">> = ({
   if (!card) return null;
   return (
     <div style={{ position: "absolute", left: 0, right: 0, bottom: Math.round(height * 0.12), display: "flex", justifyContent: "center" }}>
-      <div style={{ maxWidth: 900, padding: "16px 28px", borderRadius: 18, backgroundColor: "rgba(14,10,28,.82)", border: `1px solid ${ESCURO.fio}`, fontFamily: FONT.corpo, fontSize: 50, lineHeight: 1.15, textAlign: "center", color: ESCURO.texto }}>
+      <div style={{ maxWidth: 900, padding: "16px 28px", borderRadius: 18, backgroundColor: MOLDES.caixaLegenda, border: `1px solid ${ESCURO.fio}`, fontFamily: FONT.corpo, fontSize: 50, lineHeight: 1.15, textAlign: "center", color: ESCURO.texto }}>
         {card.map((w, i) => {
           const on = t >= w.start && t <= w.end + 0.08;
           return (
@@ -117,7 +117,7 @@ export const TextoAtras: React.FC<TextoAtrasProps> = (p) => (
         <Video src={src(p.video)} muted style={cobre(p.zoom, p.focoY)} />
       </AbsoluteFill>
     </AbsoluteFill>
-    <AbsoluteFill style={{ backgroundColor: `rgba(20,20,20,${p.escurece})` }} />
+    <AbsoluteFill style={{ backgroundColor: `rgba(${RGB.escuro},${p.escurece})` }} />
     {/* 2 · a palavra-chave, atrás da pessoa */}
     {p.chaves.map((c, i) => (
       <Chave key={i} c={c} y={p.alturaChave} />

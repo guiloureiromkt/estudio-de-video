@@ -10,23 +10,26 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { FakeUIProps, Screen } from "./schema";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO } from "../tema";
+import { FONT, ESCURO, MOLDES, SEM_NEGRITO_FALSO } from "../tema";
 
 const fontFamily = FONT.corpo;
 
 // Medido no tutorial do @tudormorari.ai (DdjiwOdMSJz): fundo #1a1008→#060402 com vinheta,
 // grade laranja fraca, número creme-pêssego com brilho, destaque laranja, texto neutro #c2bcb2.
 const mono = FONT.mono;
-// Tema trocável. "tudor" é a referência medida; "marca" usa o tema do estúdio (src/tema.ts).
+// Tema trocável. "tudor" é a referência medida (cores fixas de propósito, marcadas cor-da-referencia);
+// "marca" usa o tema do estúdio (src/tema.ts). Para a sua marca, use skin: "marca".
 // Módulo-global de propósito: o FakeUI define o tema no começo do render, antes dos filhos lerem.
 type Skin = { ink: string; panel: string; text: string; title: string; label: string; body: string; mono: string;
-  bg: string; bgImage: string; real: string; realLabel: string; badge: string; badgeText: string; labelWeight: number; num: string; numWeight: number };
+  bg: string; bgImage: string; caixa: string; borda: string; real: string; realLabel: string; badge: string; badgeText: string; labelWeight: number; num: string; numWeight: number };
 const SKINS: Record<string, Skin> = {
-  tudor: { ink: "#C2BCB2", panel: "#15110F", text: "#F4EEE6", title: fontFamily, label: fontFamily, body: fontFamily, mono,
-    bg: "#060402", bgImage: "radial-gradient(ellipse at 50% 35%, rgba(60,34,14,.95), rgba(26,16,8,.9) 45%, rgba(6,4,2,1) 85%)",
-    real: "#FCC997", realLabel: "#E8772E", badge: "#4B3BC9", badgeText: "#E9E4FF", labelWeight: 700, num: fontFamily, numWeight: 800 },
-  marca: { ink: "#BDB8C4", panel: ESCURO.fundo2, text: ESCURO.texto, title: FONT.titulo, label: FONT.display, body: FONT.corpo, mono: FONT.display,
-    bg: ESCURO.fundo, bgImage: "none",
+  // cor-da-referencia: o bloco inteiro do tudor
+  tudor: { ink: "#C2BCB2", panel: "#15110F", text: "#F4EEE6", title: fontFamily, label: fontFamily, body: fontFamily, mono, // cor-da-referencia
+    bg: "#060402", bgImage: "radial-gradient(ellipse at 50% 35%, rgba(60,34,14,.95), rgba(26,16,8,.9) 45%, rgba(6,4,2,1) 85%)", // cor-da-referencia
+    caixa: "rgba(14,10,28,.82)", borda: "rgba(239,235,227,.13)", // cor-da-referencia
+    real: "#FCC997", realLabel: "#E8772E", badge: "#4B3BC9", badgeText: "#E9E4FF", labelWeight: 700, num: fontFamily, numWeight: 800 }, // cor-da-referencia
+  marca: { ink: ESCURO.textoApoio, panel: ESCURO.fundo2, text: ESCURO.texto, title: FONT.titulo, label: FONT.display, body: FONT.corpo, mono: FONT.display,
+    bg: ESCURO.fundo, bgImage: "none", caixa: MOLDES.caixaLegenda, borda: ESCURO.fio,
     real: ESCURO.olho, realLabel: ESCURO.olho, badge: ESCURO.destaque, badgeText: ESCURO.texto, labelWeight: 400, num: FONT.display, numWeight: 400 },
 };
 let K: Skin = SKINS.tudor;
@@ -260,7 +263,7 @@ const App: React.FC<{ s: Extract<Screen, { type: "app" }>; theme: Theme }> = ({ 
             padding: "24px 26px",
             fontSize: 28,
             lineHeight: 1.45,
-            color: typedLen ? "#E6E0D8" : `${K.ink}66`,
+            color: typedLen ? K.text : `${K.ink}66`,
             boxSizing: "border-box",
           }}
         >
@@ -465,7 +468,7 @@ const Legenda: React.FC<{ words: { text: string; start: number; end: number }[];
   if (!card) return null;
   return (
     <div style={{ position: "absolute", left: 0, right: 0, bottom: Math.round(height * 0.14), display: "flex", justifyContent: "center" }}>
-      <div style={{ maxWidth: 900, padding: "16px 28px", borderRadius: 18, backgroundColor: "rgba(14,10,28,.82)", border: "1px solid rgba(239,235,227,.13)", fontFamily: K.body, fontSize: 52, lineHeight: 1.15, textAlign: "center", color: K.text }}>
+      <div style={{ maxWidth: 900, padding: "16px 28px", borderRadius: 18, backgroundColor: K.caixa, border: `1px solid ${K.borda}`, fontFamily: K.body, fontSize: 52, lineHeight: 1.15, textAlign: "center", color: K.text }}>
         {card.map((w, i) => (
           <span key={i} style={{ color: t >= w.start && t <= w.end + 0.08 ? theme.accent : undefined }}>
             {w.text}

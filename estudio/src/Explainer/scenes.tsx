@@ -1,5 +1,6 @@
 import { Img, OffthreadVideo, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { C, mono } from "./theme";
+import { MARCA, RGB } from "../tema";
 import type { Icon, Scene } from "./schema";
 
 // Relógio local da cena: segundos desde o início dela.
@@ -40,7 +41,7 @@ export const IconTile: React.FC<{ icon: Icon; size: number; glow?: number }> = (
       alignItems: "center",
       justifyContent: "center",
       boxShadow: icon.dark
-        ? `0 18px 40px rgba(30,36,44,.22), 0 0 0 ${3 * glow}px ${C.accent}, 0 0 ${36 * glow}px rgba(229,123,79,${0.45 * glow})`
+        ? `0 18px 40px rgba(${RGB.escuro},.22), 0 0 0 ${3 * glow}px ${C.accent}, 0 0 ${36 * glow}px rgba(${C.accentRgb},${0.45 * glow})`
         : "none",
     }}
   >
@@ -105,9 +106,9 @@ const Terminal: React.FC<{ scene: Extract<Scene, { type: "terminal" }> }> = ({ s
   const statusOn = t > statusAt;
   const resultAt = statusAt + 0.35;
   const fail = scene.result === "fail" ? appear(frame, fps, resultAt + 0.45) : 0;
-  const tones = ["#EDE7DB", "#E9D8C8", "#DDE3E6", "#F1E6D6", "#E3DDD0", "#E8D2C3"];
+  const tones = C.fotos;
   return (
-    <div style={{ width: 760, borderRadius: 26, backgroundColor: C.card, boxShadow: "0 30px 70px rgba(30,36,44,.28)", overflow: "hidden" }}>
+    <div style={{ width: 760, borderRadius: 26, backgroundColor: C.card, boxShadow: `0 30px 70px rgba(${RGB.escuro},.28)`, overflow: "hidden" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "22px 28px", borderBottom: `1px solid ${C.cardLine}` }}>
         <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: C.accent }} />
         <MonoLabel color={C.cardText} size={20}>{scene.title}</MonoLabel>
@@ -133,9 +134,9 @@ const Terminal: React.FC<{ scene: Extract<Scene, { type: "terminal" }> }> = ({ s
             </div>
           ) : (
             <div style={{ position: "relative", width: 250, margin: "22px auto 0" }}>
-              <Skeleton w={250} h={300} tone="#EDE7DB" delay={resultAt} />
+              <Skeleton w={250} h={300} tone={C.fotos[0]} delay={resultAt} />
               <svg width={250} height={300} style={{ position: "absolute", left: 0, top: 0, opacity: fail }}>
-                <rect width={250} height={300} rx={10} fill="rgba(30,36,44,.45)" />
+                <rect width={250} height={300} rx={10} fill={`rgba(${RGB.escuro},.45)`} />
                 <path d="M40 40 L210 260 M210 40 L40 260" stroke={C.accent} strokeWidth={10} strokeLinecap="round" />
               </svg>
             </div>
@@ -202,7 +203,7 @@ const Flow: React.FC<{ scene: Extract<Scene, { type: "flow" }> }> = ({ scene }) 
               padding: "26px 26px",
               borderRadius: 18,
               backgroundColor: C.card,
-              boxShadow: `0 18px 40px rgba(30,36,44,.22), 0 0 0 ${3 * ok}px ${C.accent}`,
+              boxShadow: `0 18px 40px rgba(${RGB.escuro},.22), 0 0 0 ${3 * ok}px ${C.accent}`,
             }}
           >
             <MonoLabel color={C.muted} size={17}>{scene.kicker}</MonoLabel>
@@ -246,7 +247,7 @@ const Fan: React.FC<{ scene: Extract<Scene, { type: "fan" }> }> = ({ scene }) =>
                 top: 20,
                 opacity: s,
                 transform: `rotate(${(i - (n - 1) / 2) * 4 * s}deg)`,
-                filter: "drop-shadow(0 18px 30px rgba(30,36,44,.25))",
+                filter: `drop-shadow(0 18px 30px rgba(${RGB.escuro},.25))`,
               }}
             >
               <Skeleton w={260} h={300} tone={tone} delay={i * 0.35} />
@@ -264,7 +265,7 @@ const Fan: React.FC<{ scene: Extract<Scene, { type: "fan" }> }> = ({ scene }) =>
                 opacity: s,
                 transform: `scale(${0.7 + 0.3 * s})`,
                 backgroundColor: C.accent,
-                color: "#FFF6EE",
+                color: MARCA.branco,
                 borderRadius: 40,
                 padding: "10px 24px",
                 fontFamily: mono,
@@ -315,7 +316,7 @@ const Cta: React.FC<{ scene: Extract<Scene, { type: "cta" }> }> = ({ scene }) =>
           padding: "26px 30px",
           borderRadius: 22,
           backgroundColor: C.card,
-          boxShadow: "0 24px 50px rgba(30,36,44,.25)",
+          boxShadow: `0 24px 50px rgba(${RGB.escuro},.25)`,
           opacity: bubble,
           transform: `translateY(${(1 - bubble) * 30}px)`,
           display: "flex",
@@ -370,7 +371,7 @@ const Midia: React.FC<{ scene: Extract<Scene, { type: "midia" }> }> = ({ scene }
           borderRadius: 26,
           overflow: "hidden",
           backgroundColor: C.card,
-          boxShadow: "0 30px 70px rgba(30,36,44,.30)",
+          boxShadow: `0 30px 70px rgba(${RGB.escuro},.30)`,
           opacity: s,
           transform: `translateY(${(1 - s) * 40}px) scale(${0.92 + 0.08 * s})`,
         }}

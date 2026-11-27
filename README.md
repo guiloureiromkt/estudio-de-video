@@ -60,7 +60,8 @@ npx skills add aaron-he-zhu/aaron-marketing-skills
 
 1. **Transcrição:** na primeira vez que pedir para editar um vídeo, o Claude cria o ambiente de Python em `~/.local/share/editar-video/` (uns 2 minutos e uns 500 MB com o modelo de transcrição). Sem placa de vídeo NVIDIA, a transcrição roda no processador: 30 segundos de fala levam uns 11 segundos.
 2. **Estilos:** na primeira vez, o Claude copia o estúdio para a sua pasta de trabalho e roda `npm ci` (de 1 a 3 minutos).
-3. **Sua marca:** peça *"pinta o estúdio com as cores da minha marca"*. Muda um arquivo só, `estudio/src/tema.ts`.
+3. **Sua marca:** peça *"pinta o estúdio com as cores da minha marca"*. Muda um arquivo só, `estudio/src/tema.ts`, e a cor e a fonte valem para todos os moldes e para a legenda dos vídeos editados.
+4. **Seu estilo:** peça *"quero criar o meu estilo a partir deste vídeo"*. A skill `estilos` parte do molde mais parecido e muda enquadramento, entrada e ritmo com você, um quadro de cada vez.
 
 ## Se der erro
 

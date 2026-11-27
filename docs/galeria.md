@@ -1,6 +1,6 @@
 # Galeria de estilos
 
-Cada molde abaixo é um estilo de vídeo pronto, em Remotion (vídeo feito com código React). As capturas estão no tema neutro do estúdio, com mídia de exemplo: azul onde vai a cor principal da sua marca, verde onde vai a secundária, um boneco onde vai o seu rosto. Para pintar com a sua marca, troque as cores em `estudio/src/tema.ts`.
+Cada molde abaixo é um estilo de vídeo pronto, em Remotion (vídeo feito com código React). As capturas estão no tema neutro do estúdio, com mídia de exemplo: azul onde vai a cor principal da sua marca, verde onde vai a secundária, um boneco onde vai o seu rosto. Para pintar com a sua marca, troque as cores em `estudio/src/tema.ts`: os moldes, as demonstrações e a legenda do `editar-video` leem todos dali.
 
 Escolha o estilo olhando. Depois peça ao Claude, por exemplo: *"quero um vídeo no estilo SplitScreen com a minha tela e o meu vídeo"*. A skill `video:estilos` conduz o resto.
 
@@ -38,7 +38,7 @@ npx remotion render src/index.ts Explainer-9x16 out/explicador.mp4
 ![FakeUI](galeria/FakeUI-9x16.png)
 
 **Medida:** 1080×1920.
-**Para que serve:** contar um resultado com números que sobem, um gráfico que se desenha e um app falso sendo usado. A captura mostra a variante `tudor`, a da referência; a variante `marca` usa o seu tema (`skin: "marca"`).
+**Para que serve:** contar um resultado com números que sobem, um gráfico que se desenha e um app falso sendo usado. A captura mostra a variante `marca`, que segue o seu tema; a variante `tudor` (`skin: "tudor"`, com `accent: "#E8772E"` e `number: "#FCC997"`) refaz as cores da referência.
 **Referência:** os tutoriais do @tudormorari.ai.
 
 ```bash

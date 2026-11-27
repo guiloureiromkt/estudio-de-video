@@ -181,7 +181,9 @@ Subtitles have three dimensions worth reasoning about: **chunking** (1/2/3/sente
 
 **Worked styles** — pick, adapt, or invent:
 
-**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, Helvetica 18 Bold, white-on-outline, `MarginV=35`. `render.py` ships with this as `SUB_FORCE_STYLE`.
+**Na marca de quem usa (sempre):** `render.py` lê a fonte e as cores da legenda do bloco `LEGENDA` de `estudio/src/tema.ts`, o mesmo arquivo que pinta os moldes do estúdio. Procura `--tema <arquivo>`, depois `./estudio/src/tema.ts` na pasta de trabalho, depois o estúdio do plugin, e carrega as fontes de `estudio/public/fontes/`. Para um vídeo só, `--legenda-fonte`, `--legenda-cor "#FFCC02"` e `--legenda-contorno` vencem o tema. O render imprime a linha `legenda: ...` com o estilo usado: confira nela antes de olhar o quadro.
+
+**`bold-overlay`** — short-form tech launch, fast-paced social. 2-word chunks, UPPERCASE, break on punctuation, 18 Bold, letter and outline colors from the theme, `MarginV=90`. `render.py` ships with this as `SUB_FORCE_STYLE` (Helvetica white-on-black only when no theme is found).
 
 ```
 FontName=Helvetica,FontSize=18,Bold=1,

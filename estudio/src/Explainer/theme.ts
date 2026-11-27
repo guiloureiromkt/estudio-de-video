@@ -1,17 +1,19 @@
-import { FONT, ESCURO, MARCA } from "../tema";
+import { FONT, ESCURO, MARCA, MOLDES, RGB } from "../tema";
 
 // Medido no reel do @thaleslaray (DdZIhviOnaC, 1080×1920) em 24/09/2026: o fundo creme quadriculado.
 // Cor de destaque e fonte vêm do tema do estúdio (src/tema.ts).
 export const C = {
   bg: MARCA.claro, // o fundo claro do tema (o creme medido no reel de referência era #FAF3E6)
-  grid: "rgba(60,45,20,.08)",
+  grid: `rgba(${RGB.escuro},.07)`,
   ink: MARCA.escuro,
-  ghost: "rgba(26,26,26,.18)",
+  ghost: `rgba(${RGB.escuro},.18)`,
   accent: ESCURO.destaque,
-  card: "#1E242C",
-  cardLine: "rgba(255,255,255,.08)",
-  cardText: "#E8E4DC",
-  muted: "#8C857A",
+  card: MOLDES.cartao.fundo,
+  cardLine: MOLDES.cartao.linha,
+  cardText: MOLDES.cartao.texto,
+  muted: MOLDES.cartao.apagado,
+  accentRgb: RGB.principal,
+  fotos: MOLDES.cartao.fotos,
 };
 
 // "sans" = corpo · "mono" = rótulos e números (as duas na fonte do tema). Os nomes ficaram pra não mexer nas cenas.

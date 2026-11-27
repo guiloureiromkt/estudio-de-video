@@ -3,7 +3,7 @@ import { Audio } from "@remotion/media";
 import { AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { CaseCard, STAGE } from "../CaseCard/CaseCard";
 import { cameraKeyframe } from "../CaseCard/schema";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO } from "../tema";
+import { FONT, ESCURO, RGB, SEM_NEGRITO_FALSO } from "../tema";
 
 // CaseCard com voz (referência @claudeai): o palco pastel com a janela e a câmera virtual,
 // no meio de uma tela vertical da marca. Uma cena por trecho da fala, legenda palavra por palavra embaixo.
@@ -79,7 +79,7 @@ export const CaseVoz: React.FC<CaseVozProps> = (p) => {
   return (
     <AbsoluteFill style={{ ...SEM_NEGRITO_FALSO, backgroundColor: ESCURO.fundo }}>
       <div style={{ position: "absolute", top: 70, left: 0, right: 0, textAlign: "center" }}>
-        <span style={{ fontFamily: FONT.display, fontSize: 22, letterSpacing: 5, textTransform: "uppercase", color: ESCURO.texto, border: `1.5px solid ${ESCURO.destaque}`, background: "rgba(232,24,122,.14)", borderRadius: 999, padding: "10px 22px" }}>{p.serie}</span>
+        <span style={{ fontFamily: FONT.display, fontSize: 22, letterSpacing: 5, textTransform: "uppercase", color: ESCURO.texto, border: `1.5px solid ${ESCURO.destaque}`, background: `rgba(${RGB.principal},.14)`, borderRadius: 999, padding: "10px 22px" }}>{p.serie}</span>
       </div>
       <div style={{ position: "absolute", top: 140, left: 60, right: 60, textAlign: "center", fontFamily: FONT.display, fontSize: 64, lineHeight: 1.05, textTransform: "uppercase", color: ESCURO.texto }}>
         <Titulo texto={p.titulo} />

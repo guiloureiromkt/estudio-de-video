@@ -1,7 +1,7 @@
 import { Video } from "@remotion/media";
 import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import type { SplitScreenProps } from "./schema";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO } from "../tema";
+import { FONT, ESCURO, MOLDES, RGB, SEM_NEGRITO_FALSO } from "../tema";
 
 const fontFamily = FONT.titulo;
 const mono = FONT.mono;
@@ -44,14 +44,14 @@ const Captions: React.FC<Pick<SplitScreenProps, "words" | "wordsPerCard" | "acce
           maxWidth: 900,
           padding: "18px 30px",
           borderRadius: 18,
-          backgroundColor: marca ? "rgba(14,10,28,.86)" : "rgba(10,10,12,.82)",
+          backgroundColor: marca ? MOLDES.caixaLegenda : "rgba(10,10,12,.82)" /* cor-da-referencia */,
           border: `1px solid ${marca ? ESCURO.fio : "rgba(255,255,255,.12)"}`,
           fontFamily: marca ? FONT.corpo : fontFamily,
           fontWeight: marca ? 700 : 800,
           fontSize: 54,
           lineHeight: 1.15,
           textAlign: "center",
-          color: marca ? ESCURO.texto : "#F5F2EC",
+          color: marca ? ESCURO.texto : "#F5F2EC", // cor-da-referencia
           letterSpacing: marca ? 0 : -0.5,
         }}
       >
@@ -85,7 +85,7 @@ export const SplitScreen: React.FC<SplitScreenProps> = (p) => {
   const offsetY = Math.min(0, Math.max(BAIXO - bottomH, centro - p.bottom.focusY * bottomH));
   const offsetX = (W - W * zoom) / 2;
   return (
-    <AbsoluteFill style={{ ...(p.skin === "marca" ? SEM_NEGRITO_FALSO : {}), backgroundColor: p.skin === "marca" ? ESCURO.fundo : "#0A0A0C" }}>
+    <AbsoluteFill style={{ ...(p.skin === "marca" ? SEM_NEGRITO_FALSO : {}), backgroundColor: p.skin === "marca" ? ESCURO.fundo : "#0A0A0C" /* cor-da-referencia */ }}>
       <div style={{ position: "absolute", top: 0, left: 0, width: W, height: HALF, overflow: "hidden" }}>
         {p.top.type === "image" ? (
           <Img src={src(p.top.src)} style={{ position: "absolute", left: 0, top: -scroll, width: W }} />
@@ -112,8 +112,8 @@ export const SplitScreen: React.FC<SplitScreenProps> = (p) => {
           width: W,
           height: SEAM,
           background: p.skin === "marca"
-            ? "linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,.94) 45%, rgba(20,20,20,.94) 55%, rgba(20,20,20,0) 100%)"
-            : "linear-gradient(180deg, rgba(10,10,12,0) 0%, rgba(10,10,12,.92) 45%, rgba(10,10,12,.92) 55%, rgba(10,10,12,0) 100%)",
+            ? `linear-gradient(180deg, rgba(${RGB.escuro},0) 0%, rgba(${RGB.escuro},.94) 45%, rgba(${RGB.escuro},.94) 55%, rgba(${RGB.escuro},0) 100%)`
+            : "linear-gradient(180deg, rgba(10,10,12,0) 0%, rgba(10,10,12,.92) 45%, rgba(10,10,12,.92) 55%, rgba(10,10,12,0) 100%)", // cor-da-referencia
         }}
       />
       <Captions words={p.words} wordsPerCard={p.wordsPerCard} accent={p.accent} skin={p.skin} />

@@ -28,6 +28,7 @@ Quem atualiza é quem mantém, quando quiser passar adiante um molde novo ou cor
 3. Provar, nesta ordem:
    - o teste de limpeza de quem mantém (fora deste repositório) → `limpo`
    - `cd estudio && npx tsc --noEmit` → sem erro
+   - `bash testes/cores-fora-do-tema.sh` → `nenhuma cor de marca fora do tema.ts` (cor nova entra no `estudio/src/tema.ts`, nunca escrita no molde)
    - `bash testes/galeria.sh` e olhar as capturas que mudaram; se for molde novo, uma ficha nova em `docs/galeria.md`
    - `bash testes/instalar-limpo.sh` → `Successfully installed plugin: video@estudio-de-video`
 4. Subir a versão em `.claude-plugin/plugin.json`, commitar e dar push.

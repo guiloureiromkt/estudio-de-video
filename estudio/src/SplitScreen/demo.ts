@@ -1,4 +1,5 @@
 import type { SplitScreenProps } from "./schema";
+import { MARCA } from "../tema";
 import words from "./words-exemplo.json";
 
 // Demo: em cima a página de exemplo rolando (public/demo/site.jpg); embaixo o "seu vídeo aqui"
@@ -10,6 +11,6 @@ export const splitScreenDemo: SplitScreenProps = {
   bottom: { src: "demo/rosto.mp4", focusY: 0.62, zoom: 1 },
   words,
   wordsPerCard: 4,
-  accent: "#2F5BEA",
+  accent: MARCA.principal,
   handle: "suamarca",
 };

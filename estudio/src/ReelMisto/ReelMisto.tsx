@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { AbsoluteFill, Img, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Abertura, Fechamento } from "../Vinhetas";
+import { ESCURO } from "../tema";
 import { SplitScreen } from "../SplitScreen/SplitScreen";
 import { splitScreenSchema } from "../SplitScreen/schema";
 import { Animacao, animacaoSchema } from "../Animacao/Animacao";
@@ -64,7 +65,7 @@ export const ReelMisto: React.FC<ReelMistoProps> = (p) => {
     );
   });
   return (
-    <AbsoluteFill style={{ backgroundColor: "#141414" }}>
+    <AbsoluteFill style={{ backgroundColor: ESCURO.fundo }}>
       {itens}
       {p.abertura ? (
         <Sequence durationInFrames={Math.round(p.abertura.segundos * fps)}>

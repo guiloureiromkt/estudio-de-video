@@ -1,4 +1,5 @@
 import type { ExplainerProps } from "./schema";
+import { MOLDES } from "../tema";
 
 // Demo sem locução: um roteiro de exemplo sobre dar ao Claude um jeito de "ver" um vídeo.
 // Troque as cenas pelo seu roteiro (a skill short-video-scripter ajuda a escrever).
@@ -54,7 +55,7 @@ export const explainerDemo: ExplainerProps = {
       start: 10.4,
       duration: 2.4,
       caption: "Roteiro, estilo e *o repo por trás*",
-      cards: ["#E9D8C8", "#DDE3E6", "#F1E6D6"],
+      cards: MOLDES.cartao.fotos.slice(1, 4),
       pills: ["Roteiro", "Estilo", "Repos"],
     },
     {

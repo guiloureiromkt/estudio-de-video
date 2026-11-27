@@ -1,8 +1,8 @@
-import { FONT } from "../tema";
+import { FONT, MOLDES } from "../tema";
 
 const fontFamily = FONT.corpo;
 
-// Faixa medida nos vídeos da @claudeai (22/09/2026): 1080×270, #131313, texto #EDEDE8,
+// Faixa medida nos vídeos da @claudeai (22/09/2026): 1080×270, fundo quase preto, texto creme (cores em MOLDES.faixa, no tema),
 // margem esquerda 61 px, primeira linha 68 px abaixo do topo, corpo 30/40, no máximo 2 linhas,
 // crédito 30 px abaixo do parágrafo.
 export const BAND_HEIGHT = 270;
@@ -20,8 +20,8 @@ export const CaptionBand: React.FC<{
         right: 0,
         bottom: 0,
         height: BAND_HEIGHT,
-        backgroundColor: "#131313",
-        color: "#EDEDE8",
+        backgroundColor: MOLDES.faixa.fundo,
+        color: MOLDES.faixa.texto,
         fontFamily,
         padding: "68px 61px 0 61px",
         boxSizing: "border-box",

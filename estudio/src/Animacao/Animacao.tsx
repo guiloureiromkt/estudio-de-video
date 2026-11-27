@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Audio, Video } from "@remotion/media";
 import { AbsoluteFill, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO } from "../tema";
+import { FONT, ESCURO, MOLDES, SEM_NEGRITO_FALSO } from "../tema";
 
 // Clipes em tela cheia: seus vídeos (ou clipes feitos em outro molde) em sequência, com fusão curta,
 // a voz por baixo e a legenda palavra por palavra.
@@ -56,7 +56,7 @@ const Legenda: React.FC<Pick<AnimacaoProps, "words" | "wordsPerCard">> = ({ word
           maxWidth: 900,
           padding: "18px 30px",
           borderRadius: 18,
-          backgroundColor: "rgba(14,10,28,.82)",
+          backgroundColor: MOLDES.caixaLegenda,
           border: `1px solid ${ESCURO.fio}`,
           fontFamily: FONT.corpo,
           fontWeight: 700,

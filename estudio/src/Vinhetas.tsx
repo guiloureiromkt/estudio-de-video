@@ -1,5 +1,5 @@
 import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
-import { FONT, ESCURO, SEM_NEGRITO_FALSO, ponto } from "./tema";
+import { FONT, ESCURO, RGB, SEM_NEGRITO_FALSO, ponto } from "./tema";
 
 // Motion do site (DESIGN.md §Motion): a LUZ é o que se move; easing exponencial, sem bounce.
 const EASE = Easing.bezier(0.16, 1, 0.3, 1);
@@ -21,7 +21,7 @@ const Ceu: React.FC<{ luz: number }> = ({ luz }) => {
       <AbsoluteFill
         style={{
           opacity: luz,
-          background: `radial-gradient(ellipse at 50% ${46 - 6 * luz}%, rgba(47,91,234,.16), rgba(31,163,122,.08) ${34 + 6 * luz}%, rgba(20,20,20,0) 72%)`,
+          background: `radial-gradient(ellipse at 50% ${46 - 6 * luz}%, rgba(${RGB.principal},.16), rgba(${RGB.secundaria},.08) ${34 + 6 * luz}%, rgba(${RGB.escuro},0) 72%)`,
         }}
       />
       {Array.from({ length: 22 }).map((_, i) => {
@@ -103,7 +103,7 @@ export const Abertura: React.FC<{ serie: string; titulo: string }> = ({ serie, t
             textTransform: "uppercase",
             color: ESCURO.texto,
             border: `1.5px solid ${ESCURO.destaque}`,
-            background: "rgba(47,91,234,.14)",
+            background: `rgba(${RGB.principal},.14)`,
             borderRadius: 999,
             padding: "12px 26px",
             opacity: at(0.45, 0.8),

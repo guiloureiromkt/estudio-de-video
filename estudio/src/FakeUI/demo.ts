@@ -1,11 +1,14 @@
 import type { FakeUIProps } from "./schema";
+import { MARCA } from "../tema";
 
 // Demo com números de exemplo: 31 links, 29 analisados, acumulado por lote [0, 6, 17, 28, 29].
 // Troque pelos números do seu trabalho.
 export const fakeUIDemo: FakeUIProps = {
   durationInSeconds: 17,
-  accent: "#E8772E",
-  number: "#FCC997",
+  // skin "marca" segue o tema; skin "tudor" com accent "#E8772E" e number "#FCC997" refaz o visual da referência
+  skin: "marca",
+  accent: MARCA.principal,
+  number: MARCA.branco,
   screens: [
     { type: "counter", start: 0, duration: 3.4, pill: "Primeira leva", prefix: "POSTS", value: 29, total: 31 },
     { type: "title", start: 3.1, duration: 2.6, lines: ["O Claude", "assiste reel"] },

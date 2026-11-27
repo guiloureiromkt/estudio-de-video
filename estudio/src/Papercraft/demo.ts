@@ -1,4 +1,5 @@
 import type { PapercraftProps } from "./Papercraft";
+import { MARCA } from "../tema";
 
 // Demo: duas cenas de colagem com os recortes gerados por demo/gerar-demos.sh.
 // Cada palavra do título entra no segundo "em" (relativo à cena): é assim que a colagem acompanha a fala.
@@ -11,7 +12,7 @@ export const papercraftDemo: PapercraftProps = {
       inicio: 0,
       fim: 4,
       semente: 7,
-      paleta: ["#F4F4F2", "#2F5BEA"],
+      paleta: [MARCA.claro, MARCA.principal],
       fundoClaro: true,
       titulo: {
         linhas: [
@@ -30,7 +31,7 @@ export const papercraftDemo: PapercraftProps = {
       inicio: 4,
       fim: 8,
       semente: 21,
-      paleta: ["#141414", "#1FA37A"],
+      paleta: [MARCA.escuro, MARCA.secundaria],
       titulo: {
         linhas: [[{ t: "Recorte,", em: 0.2 }, { t: "cola", em: 0.6 }], [{ t: "e", em: 0.9 }, { t: "publica", em: 1.1, destaque: true }]],
         x: 90, y: 380, tam: 120, rot: 2, largura: 900,
