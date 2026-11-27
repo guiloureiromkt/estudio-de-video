@@ -17,7 +17,7 @@ Confira cada um no terminal. Se faltar algum, o Claude ajuda a instalar.
 | O quê | Para quê | Como conferir |
 |---|---|---|
 | Claude Code | rodar as skills | `claude --version` |
-| Login no GitHub | este repositório é privado | `gh auth status` (se não tiver o `gh`: <https://cli.github.com>, depois `gh auth login`) |
+| Login no GitHub | este repositório é privado | `gh auth status` (se não tiver o `gh`: <https://cli.github.com>). Para entrar: `gh auth login`, escolha **HTTPS** e responda **Yes** quando ele perguntar se quer usar o login no Git. Já entrou antes sem isso? Rode `gh auth setup-git`. |
 | Node 20 ou mais novo | os estilos (Remotion) | `node -v` |
 | ffmpeg | cortar, juntar e converter vídeo | `ffmpeg -version` |
 | Python 3.10 ou mais novo | a transcrição | `python3 --version` |
@@ -65,7 +65,7 @@ npx skills add aaron-he-zhu/aaron-marketing-skills
 
 ## Se der erro
 
-- **`/plugin marketplace add` falha com erro de acesso** (algo como *"Repository not found"*, *"could not read Username"* ou *"Permission denied"*): o GitHub não sabe que é você. Rode `gh auth login`, aceite o convite do repositório no e-mail ou em <https://github.com/notifications> e tente de novo.
+- **`/plugin marketplace add` falha com erro de acesso.** A mensagem diz *"SSH authentication failed"* e, mais abaixo, *"unable to get password from user"* (ou *"Repository not found"*). O Claude tentou baixar o pacote pelos dois caminhos do GitHub e o GitHub não sabe que é você. Três coisas, nesta ordem: (1) aceite o convite do repositório no e-mail ou em <https://github.com/notifications>; (2) rode `gh auth login` (HTTPS, e **Yes** para usar o login no Git), ou `gh auth setup-git` se já estava logado; (3) tente de novo.
 - **`ensurepip is not available`** ao criar o ambiente de Python: falta o pacote `python3-venv` do Ubuntu. Use o `uv` (tabela acima).
 - **A transcrição está lenta:** é o processador trabalhando. Para um vídeo de 10 minutos, conte uns 4 minutos.
 - **O render trava ou fecha:** renderize um vídeo de cada vez e feche outros programas pesados.
