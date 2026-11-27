@@ -72,7 +72,7 @@ Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this
 ## Helpers
 
 - **`transcribe.py <video>`** — transcribes one file. Local faster-whisper by default (GPU if present, else CPU); ElevenLabs Scribe only if a key already exists. `--num-speakers N` applies to Scribe only. Cached.
-- **`transcribe_batch.py <videos_dir>`** — 4-worker parallel transcription. Use for multi-take.
+- **`transcribe_batch.py <videos_dir>`** — transcribes every take in a folder. With a Scribe key, 4 files in parallel; local (the default), one file at a time so the laptop does not run out of memory. Use for multi-take.
 - **`pack_transcripts.py --edit-dir <dir>`** — `transcripts/*.json` → `takes_packed.md` (phrase-level, break on silence ≥ 0.5s).
 - **`timeline_view.py <video> <start> <end>`** — filmstrip + waveform PNG. On-demand visual drill-down. **Not a scan tool** — use it at decision points, not constantly.
 - **`render.py <edl.json> -o <out>`** — per-segment extract → concat → overlays (PTS-shifted) → subtitles LAST. `--preview` for 720p fast. `--build-subtitles` to generate master.srt inline.
