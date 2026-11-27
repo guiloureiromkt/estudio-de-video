@@ -2,7 +2,7 @@
 # Instala o plugin num usuário vazio (HOME temporário), como se fosse a máquina de quem vai usar.
 # Uso: bash testes/instalar-limpo.sh                         (instala desta pasta)
 #      bash testes/instalar-limpo.sh <dono/repo>              (instala do GitHub)
-#      SEM_ACESSO=1 bash testes/instalar-limpo.sh <dono/repo> (tem que FALHAR: prova que o repositório é fechado)
+#      SEM_ACESSO=1 bash testes/instalar-limpo.sh <dono/repo> (sem chave nem login: passa se o repositório é público, falha se é privado)
 #
 # Atenção: trocar o HOME não esconde a chave SSH da máquina. O ssh lê a pasta ~/.ssh do usuário
 # real, não a do HOME. Por isso, na máquina de quem mantém o pacote, o modo do GitHub passa mesmo

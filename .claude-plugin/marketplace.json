@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "estudio-de-video",
-  "description": "Pacote privado de vídeo: estilos em Remotion com galeria, edição conversando e extração de gravações, só com o Claude e a máquina de quem usa.",
+  "description": "Pacote de vídeo: estilos em Remotion com galeria, edição conversando e extração de gravações, só com o Claude e a máquina de quem usa.",
   "owner": {
     "name": "Gui Loureiro"
   },

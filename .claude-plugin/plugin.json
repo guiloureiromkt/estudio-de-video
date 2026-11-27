@@ -1,7 +1,7 @@
 {
   "name": "video",
   "description": "Estúdio de vídeo só com o Claude e a sua máquina: dez estilos de vídeo em Remotion num tema neutro que você pinta com a sua marca, com galeria para escolher olhando; edição de vídeo conversando, com transcrição local; e extração de conteúdo de gravações. Sem gerador pago de imagem, vídeo ou voz.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Gui Loureiro"
   },

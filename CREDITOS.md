@@ -2,7 +2,7 @@
 
 ## De onde veio cada estilo
 
-Os moldes foram construídos olhando vídeos de criadores no Instagram: medidas, ritmo, enquadramento e cores foram copiados para aprender a técnica. O código é próprio; o estilo é deles.
+Vários moldes foram inspirados em vídeos de criadores do Instagram e feitos do zero em código para estudar a técnica. O código é deste pacote; o crédito do estilo é de quem o criou.
 
 | Molde | Referência |
 |---|---|
@@ -24,4 +24,4 @@ Os moldes foram construídos olhando vídeos de criadores no Instagram: medidas,
 
 ## Redistribuição
 
-Este pacote é privado. Não se repassa, não se publica e não vira produto de terceiros sem revisão e autorização por escrito do titular (ver `LICENSE`), porque mistura estilos de criadores, código MIT de terceiros e o licenciamento do Remotion.
+O repositório é público para quem quiser instalar e aprender. Os moldes não se vendem nem se reembalam como produto, pacote ou curso (ver `LICENSE`). O código de terceiros segue a licença de cada um, listada acima.

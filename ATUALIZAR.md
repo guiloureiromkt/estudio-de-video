@@ -34,6 +34,6 @@ Quem atualiza é quem mantém, quando quiser passar adiante um molde novo ou cor
 
 ## Acesso
 
-- Dar acesso: `gh api -X PUT repos/guiloureiromkt/estudio-de-video/collaborators/<usuário> -f permission=pull`.
-- Tirar acesso: `gh api -X DELETE repos/guiloureiromkt/estudio-de-video/collaborators/<usuário>`.
-- Se algo pessoal escapar para o repositório: tirar o acesso, apagar o repositório e recriar a partir de uma cópia limpa. O que já foi clonado não volta; por isso a limpeza vem antes de cada push.
+- O repositório é público: qualquer pessoa instala com o endereço, sem login.
+- Para fechar de novo: `gh repo edit guiloureiromkt/estudio-de-video --visibility private --accept-visibility-change-consequences`.
+- Se algo pessoal escapar para o repositório: fechar na hora (comando acima), limpar e recriar a partir de uma cópia limpa. O que já foi clonado não volta; por isso a limpeza vem antes de cada push.

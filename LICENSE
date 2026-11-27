@@ -1,10 +1,15 @@
-Copyright (c) 2026 Gui Loureiro. Todos os direitos reservados.
+Copyright (c) 2026 Gui Loureiro.
 
-Este repositório é privado. Quem foi convidado pode instalar, usar e alterar o
-conteúdo para o próprio trabalho, inclusive em vídeos para clientes, nos termos
-do CREDITOS.md. Não é permitido redistribuir, publicar ou repassar o repositório,
-inteiro ou em parte, sem autorização por escrito do titular.
+Qualquer pessoa pode instalar, usar e alterar este pacote para aprender e para
+o próprio trabalho, inclusive em vídeos para clientes, nos termos do CREDITOS.md.
+
+Não é permitido vender, sublicenciar ou redistribuir os moldes (estudio/,
+skills/estilos/ e docs/), inteiros ou em parte, como produto, pacote, template
+ou curso, nem apresentá-los como criação própria, sem autorização por escrito
+do titular.
 
 Exceções, com licença própria dentro da pasta:
 - skills/editar-video/ — video-use, licença MIT (Copyright (c) 2026 Browser Use).
 - estudio/public/fontes/inter.woff2 — Inter, SIL Open Font License 1.1.
+
+O pacote é entregue como está, sem garantia de nenhum tipo.
