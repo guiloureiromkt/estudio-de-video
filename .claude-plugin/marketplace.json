@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "estudio-de-video",
+  "description": "Pacote privado de vídeo: estilos em Remotion com galeria, edição conversando e extração de gravações, só com o Claude e a máquina de quem usa.",
+  "owner": {
+    "name": "Gui Loureiro"
+  },
+  "plugins": [
+    {
+      "name": "video",
+      "description": "video:estilos escolhe um dos dez estilos pela galeria e monta o vídeo no tema da sua marca. video:editar-video corta, legenda e acerta a cor conversando, com transcrição na própria máquina. video:extrair-gravacao transcreve uma gravação longa e garimpa conteúdo só com o que foi dito.",
+      "author": {
+        "name": "Gui Loureiro"
+      },
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

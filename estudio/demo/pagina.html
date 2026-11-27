@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Página de exemplo</title>
+<style>
+  @font-face { font-family: Inter; src: url(../public/fontes/inter.woff2) format("woff2"); font-weight: 100 900; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1440px; font-family: Inter, Arial, sans-serif; color: #141414; background: #F4F4F2; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 28px 96px; }
+  .logo { display: flex; gap: 12px; align-items: center; font-weight: 800; font-size: 22px; letter-spacing: .04em; }
+  .logo i { width: 22px; height: 22px; border-radius: 50%; background: #2F5BEA; display: block; }
+  nav { display: flex; gap: 36px; font-size: 17px; color: #4A4A4A; }
+  .heroi { padding: 110px 96px 90px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
+  h1 { font-size: 76px; line-height: 1.02; letter-spacing: -.03em; font-weight: 800; }
+  h1 em { font-style: normal; color: #2F5BEA; }
+  .heroi p { margin-top: 26px; font-size: 22px; line-height: 1.5; color: #4A4A4A; max-width: 560px; }
+  .botao { display: inline-block; margin-top: 36px; padding: 20px 34px; border-radius: 14px; background: #2F5BEA; color: #fff; font-weight: 700; font-size: 19px; }
+  .quadro { height: 440px; border-radius: 28px; background: linear-gradient(150deg, #2F5BEA, #1FA37A); position: relative; overflow: hidden; }
+  .quadro div { position: absolute; background: rgba(255,255,255,.9); border-radius: 18px; }
+  .q1 { left: 40px; top: 46px; width: 260px; height: 150px; }
+  .q2 { right: 40px; top: 120px; width: 220px; height: 260px; }
+  .q3 { left: 80px; bottom: 40px; width: 300px; height: 120px; }
+  .faixa { padding: 70px 96px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card { background: #fff; border-radius: 22px; padding: 38px; min-height: 260px; }
+  .card b { display: block; font-size: 54px; color: #2F5BEA; font-weight: 800; }
+  .card h3 { margin-top: 18px; font-size: 26px; }
+  .card p { margin-top: 12px; font-size: 18px; line-height: 1.5; color: #4A4A4A; }
+  .passos { padding: 80px 96px; }
+  .passos h2 { font-size: 52px; letter-spacing: -.02em; }
+  .passo { display: grid; grid-template-columns: 90px 1fr; gap: 24px; padding: 34px 0; border-bottom: 1px solid rgba(20,20,20,.12); }
+  .passo span { font-size: 40px; font-weight: 800; color: #1FA37A; }
+  .passo h4 { font-size: 26px; } .passo p { margin-top: 8px; font-size: 19px; color: #4A4A4A; line-height: 1.5; }
+  footer { margin-top: 60px; padding: 70px 96px 120px; background: #141414; color: #D6D6D6; font-size: 18px; }
+  footer h2 { color: #fff; font-size: 44px; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+  <header><div class="logo"><i></i>ESTÚDIO EXEMPLO</div><nav><span>Serviços</span><span>Casos</span><span>Sobre</span><span>Contato</span></nav></header>
+  <section class="heroi">
+    <div>
+      <h1>Uma página feita <em>conversando</em> com a IA.</h1>
+      <p>Esta é uma página de exemplo para os moldes do estúdio de vídeo. Troque pela captura da sua página, do seu produto ou da sua tela.</p>
+      <span class="botao">Quero ver como funciona</span>
+    </div>
+    <div class="quadro"><div class="q1"></div><div class="q2"></div><div class="q3"></div></div>
+  </section>
+  <section class="faixa">
+    <div class="card"><b>3 h</b><h3>do zero ao ar</h3><p>Um número grande, uma frase curta e uma explicação de duas linhas.</p></div>
+    <div class="card"><b>12</b><h3>telas prontas</h3><p>O molde de caso de uso aproxima a câmera em cada bloco desta página.</p></div>
+    <div class="card"><b>0</b><h3>linhas na mão</h3><p>Troque estes cartões pelos números do seu trabalho.</p></div>
+  </section>
+  <section class="passos">
+    <h2>Como funciona</h2>
+    <div class="passo"><span>01</span><div><h4>Você descreve o que quer</h4><p>Em português, do jeito que falaria com alguém da equipe.</p></div></div>
+    <div class="passo"><span>02</span><div><h4>A IA monta e mostra</h4><p>Você vê a primeira versão em minutos e pede os ajustes.</p></div></div>
+    <div class="passo"><span>03</span><div><h4>Você publica</h4><p>Quando estiver do seu jeito, e não antes.</p></div></div>
+  </section>
+  <footer><h2>Vamos conversar?</h2><p>contato@exemplo.com · Rodapé de exemplo</p></footer>
+</body>
+</html>
